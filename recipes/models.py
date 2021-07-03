@@ -22,6 +22,12 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
     
+    def get_unit_for_display(self):
+        if self.unit == self.GRAM:
+            return "grams"
+        else:
+            return "liters"
+    
     
 class Recipe(models.Model):
     name = models.CharField(max_length=255)

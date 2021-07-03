@@ -14,3 +14,9 @@ def get_recipe(request, recipe_id):
     return render(request, 'recipe.html', {
         'recipe': recipe
     })
+
+def get_ingredient(request, ingredient_id):
+    ingredient = get_object_or_404(models.Ingredient, pk=ingredient_id)
+    return render(request, 'ingredient.html', {
+        'ingredient': ingredient
+    })
