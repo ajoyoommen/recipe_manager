@@ -1,5 +1,9 @@
-<ul>
-{% for r in recipes %}
-  <li>{{ r.name }}</li>
-{% endfor %}
-</ul>
+{% extends 'base.html' %}
+
+{% block body %}
+  <ul>
+  {% for r in recipes %}
+    <li>{{ r.name }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
