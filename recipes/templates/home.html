@@ -1,5 +1,16 @@
-<ul>
-{% for r in recipes %}
-  <li>{{ r.name }}</li>
-{% endfor %}
-</ul>
+{% extends '_layout.html' %}
+
+{% block title %}Recipes | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-3">
+      {% if recipes %}
+        <h6>Click on a recipe to edit some information</h6>
+        {% include '__recipes.html' %}
+      {% else %}
+      <h6>No recipes have been added yet! Add a <a href="#">new</a> recipe.</h6>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
