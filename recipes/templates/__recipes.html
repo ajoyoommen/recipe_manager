@@ -1,12 +1,14 @@
-<ul class="list-group">
-  {% for r in recipes %}
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">{{ r.name }}</div>
-        {{ r.description }}
-      </div>
+{% load static %}
 
-      <span class="badge bg-primary rounded-pill">{{ r.count_ingredients }}</span>
-    </li>
-  {% endfor %}
-</ul>
+{% for r in recipes %}
+  <div class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/recipe-book.jpg' %}" class="card-img-top" alt="Recipe for {{ r.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ r.name }}</h5>
+          <p class="card-text">{{ r.description }}</p>
+          <a href="{% url 'recipe-detail' r.id %}" class="btn btn-primary">View recipe</a>
+        </div>
+      </div>
+  </div>
+{% endfor %}
