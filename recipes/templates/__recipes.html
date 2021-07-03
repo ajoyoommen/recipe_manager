@@ -7,7 +7,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ r.name }}</h5>
           <p class="card-text">{{ r.description }}</p>
-          <a href="#" class="btn btn-primary">View recipe</a>
+          <a href="{% url 'recipe-detail' r.id %}" class="btn btn-primary">View recipe</a>
         </div>
       </div>
   </div>

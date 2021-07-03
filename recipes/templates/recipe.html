@@ -1,0 +1,19 @@
+{% extends '_layout.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.name }} | #{{ recipe.id }} | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/recipe-book.jpg' %}" class="card-img-top" alt="Recipe for {{ r.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe.name }}</h5>
+          <p class="card-text">{{ recipe.description }}</p>
+          <a href="{% url 'recipe-detail' recipe.id %}" class="btn btn-primary">View recipe</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
