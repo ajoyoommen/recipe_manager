@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 
 
@@ -28,12 +30,21 @@ class Recipe(models.Model):
     
     def __str__(self):
         return self.name
-    
+
+    def get_cost(self):
+        cost_ingds = [i.get_cost() for i in self.quantities.all()]
+        return sum(cost_ingds)
+
+    def count_ingredients(self):
+        return self.quantities.count()
 
 class RecipeIngredient(models.Model):
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipes')
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="quantities")
     quantity = models.FloatField(default=0)
     
     def __str__(self):
         return f'{self.ingredient} in {self.recipe}'
+
+    def get_cost(self):
+        return self.ingredient.cost * Decimal(self.quantity)
