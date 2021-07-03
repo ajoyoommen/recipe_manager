@@ -1,0 +1,32 @@
+{% extends '_layout.html' %}
+{% load static %}
+
+{% block title %}{{ ingredient.name }} | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body row">
+          <div class="col-md-2">
+            <img src="{% static 'images/ingredients.jpg' %}" class="card-img-top" alt="Recipe for {{ r.name }}">
+          </div>
+          <div class="col-md-8">
+            <h5 class="card-title">{{ ingredient.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Ingredient</h6>
+            <hr>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">₹ {{ ingredient.cost }}</h5>
+                  <small>Per {{ ingredient.unit }}</small>
+                </div>
+                <p class="mb-1">{{ i.quantity }} {{ i.ingredient.get_unit_for_display}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
