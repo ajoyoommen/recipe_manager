@@ -6,8 +6,8 @@ class Ingredient(models.Model):
     LITER = 'liter'
     
     UNITS = (
-        (GRAM, 'grams'),
-        (LITER, 'liters')
+        (GRAM, '1 gram'),
+        (LITER, '1 liter')
     )
 
     name = models.CharField(max_length=255)
