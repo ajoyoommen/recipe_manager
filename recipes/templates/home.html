@@ -1,16 +1,24 @@
 {% extends '_layout.html' %}
+{% load static %}
 
 {% block title %}Recipes | Recipe Manager{% endblock %}
 
 {% block content %}
   <div class="row">
-    <div class="col-md-3">
-      {% if recipes %}
-        <h6>Click on a recipe to edit some information</h6>
-        {% include '__recipes.html' %}
-      {% else %}
-      <h6>No recipes have been added yet! Add a <a href="#">new</a> recipe.</h6>
-      {% endif %}
+    <div class="col-md-5">
+      <p class="lead">Welcome to recipe manager. You can use this simple application to create recipes, ingredients, calculate costs and quantities that you would required. based on ingredients.</p>
     </div>
+    <div class="col">
+      <img src="{% static 'images/recipe.jpg' %}" class="img-fluid">
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    {% if recipes %}
+      <p>Here are some recipes, click to view more information</p>
+      {% include '__recipes.html' %}
+    {% else %}
+    <h6>No recipes have been added yet! Add a <a href="#">new</a> recipe.</h6>
+    {% endif %}
   </div>
 {% endblock %}
