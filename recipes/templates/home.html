@@ -4,9 +4,15 @@
 {% block title %}Recipes | Recipe Manager{% endblock %}
 
 {% block content %}
-  <div class="row p-5">
+  <div class="row mx-1 p-5 bg-dark">
     <div class="col">
-      <p class="h3">Welcome to recipe manager! A simple application to manage your kitchen supplies. Create recipes, add ingredients and view computed costs to make your life easier.</p>
+      <figure class="text-center">
+        <blockquote class="blockquote text-light">
+          <p>Welcome to recipe manager! A simple application to manage your kitchen supplies.</p>
+          <p>Create recipes, add ingredients and view computed costs to make your life easier!</p>
+        </blockquote>
+      </figure>
+      <p class="h3"></p>
       <!--div class="col-md-6">
         <img src="{% static 'images/recipe.jpg' %}" class="img-fluid">
       </div-->
@@ -17,7 +23,7 @@
     {% if recipes %}
       <h3>Recipes</h3>
       <p>Here are some recipes, click to view more information</p>
-      {% include '__recipes.html' %}
+      {% include 'recipes/__list_cards.html' %}
     {% else %}
     <h6>No recipes have been added yet! Add a <a href="#">new</a> recipe.</h6>
     {% endif %}
