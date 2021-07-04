@@ -1,9 +1,10 @@
+from django.db import transaction
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 from recipes import models
-from recipes.forms import IngredientForm
+from recipes.forms import IngredientForm, IngredientsFormSet, RecipeForm
 
 
 def home(request):
@@ -56,4 +57,22 @@ class UpdateIngredient(UpdateView):
 class AddRecipe(CreateView):
     model = models.Recipe
     template_name = 'recipes/new.html'
-    fields = ('name', 'description')
+    form_class = RecipeForm
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['ingredients'] = IngredientsFormSet(self.request.POST)
+        else:
+            data['ingredients'] = IngredientsFormSet()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        ingredients = context['ingredients']
+        with transaction.atomic():
+            self.object = form.save()
+            if ingredients.is_valid():
+                ingredients.instance = self.object
+                ingredients.save()
+        return super().form_valid(form)

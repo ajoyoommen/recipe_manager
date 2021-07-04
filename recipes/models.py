@@ -63,6 +63,9 @@ class Recipe(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('recipe-detail', kwargs={'recipe_id': self.pk})
+
     def get_cost(self):
         cost_ingds = [i.get_cost() for i in self.ingredients.all()]
         return sum(cost_ingds)
