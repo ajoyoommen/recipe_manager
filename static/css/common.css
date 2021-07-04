@@ -4,3 +4,11 @@
   color: #fff;
   line-height: 15rem;
 }
+
+.bg-common {
+  background-color: #f2bb3a;
+}
+
+.bg-ingredient {
+  background-color: #f2bb3a42;
+}

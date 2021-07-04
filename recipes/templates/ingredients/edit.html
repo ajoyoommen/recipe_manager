@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-4">
       <form method="post">{% csrf_token %}
-        <p class="lead">Add an ingredient</p>
+        <p class="lead">Edit ingredient</p>
         <p>
           <label class="form-label" for="id_name">Name:</label>
           <input class="form-control" type="text" name="name" maxlength="255" required="" id="id_name" value="{{ ingredient.name }}">
@@ -33,7 +33,7 @@
             {{ form.errors}}
           </div>
         {% endif %}
-        <input class="form-control btn-primary" type="submit" value="Update">
+        <input class="form-control btn-primary" type="submit" value="Save">
       </form>
     </div>
   </div>
