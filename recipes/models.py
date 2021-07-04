@@ -6,6 +6,8 @@ from django.db import models
 class Ingredient(models.Model):
     GRAM = 'gram'
     LITER = 'liter'
+    FACTOR_GRAM_TO_KG = 1000
+    FACTOR_LITER_TO_CL = 1 / 100
     
     UNITS = (
         (GRAM, '1 gram'),
@@ -27,8 +29,29 @@ class Ingredient(models.Model):
             return "grams"
         else:
             return "liters"
-    
-    
+
+    def get_units(self):
+        units = []
+        _base = {
+            'unit': self.unit,
+            'cost': self.cost
+        }
+        if self.unit == self.GRAM:
+            units.append(_base)
+            units.append({
+                'unit': 'kilo gram',
+                'cost': round(self.cost * Decimal(self.FACTOR_GRAM_TO_KG), 4)
+            })
+        else:
+            units.append({
+                'unit': 'centiliter',
+                'cost': round(self.cost * Decimal(self.FACTOR_LITER_TO_CL), 4)
+            })
+            units.append(_base)
+        return units
+
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -46,6 +69,7 @@ class Recipe(models.Model):
 
     def get_initials(self):
         return self.name[0].upper()
+
 
 class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipes')

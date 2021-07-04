@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="card">
+  <div class="card-body row">
+    <div class="col-md-2">
+      <img src="{% static 'images/ingredients.jpg' %}" class="card-img-top" alt="Recipe for {{ r.name }}">
+    </div>
+    <div class="col-md-8">
+      <h5 class="card-title">{{ ingredient.name }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Ingredient</h6>
+      <hr>
+      <ul class="list-group list-group-flush">
+        {% for unit in ingredient.get_units %}
+          <li class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">₹ {{ unit.cost }}</h5>
+              <small>Per {{ unit.unit }}</small>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

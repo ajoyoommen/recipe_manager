@@ -1,0 +1,14 @@
+{% extends '_layout.html' %}
+{% load static %}
+
+{% block title %}All ingredients | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row pt-5">
+    {% for ingredient in ingredients %}
+    <div class="col-md-4">
+      {% include '__ingredient_card.html' %}
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
