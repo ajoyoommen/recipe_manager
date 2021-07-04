@@ -1,8 +1,9 @@
 from decimal import Decimal
 
 from django import forms
+from django.forms import inlineformset_factory
 
-from recipes.models import Ingredient
+from recipes.models import Ingredient, Recipe, RecipeIngredient
 
 
 CHOICES = (
@@ -41,3 +42,13 @@ class IngredientForm(forms.ModelForm):
         if commit:
             obj.save()
         return obj
+
+
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('name', 'description')
+
+
+IngredientsFormSet = inlineformset_factory(
+    Recipe, RecipeIngredient, form=RecipeForm, fields=['ingredient', 'quantity'])
