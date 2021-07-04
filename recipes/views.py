@@ -51,3 +51,9 @@ class UpdateIngredient(UpdateView):
     model = models.Ingredient
     template_name = 'ingredients/edit.html'
     form_class = IngredientForm
+
+
+class AddRecipe(CreateView):
+    model = models.Recipe
+    template_name = 'recipes/new.html'
+    fields = ('name', 'description')

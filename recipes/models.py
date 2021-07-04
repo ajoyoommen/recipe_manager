@@ -59,17 +59,16 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     
     def __str__(self):
         return self.name
 
     def get_cost(self):
-        cost_ingds = [i.get_cost() for i in self.quantities.all()]
+        cost_ingds = [i.get_cost() for i in self.ingredients.all()]
         return sum(cost_ingds)
 
     def count_ingredients(self):
-        return self.quantities.count()
+        return self.ingredients.count()
 
     def get_initials(self):
         return self.name[0].upper()
@@ -77,7 +76,7 @@ class Recipe(models.Model):
 
 class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipes')
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="quantities")
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="ingredients")
     quantity = models.FloatField(default=0)
     
     def __str__(self):
