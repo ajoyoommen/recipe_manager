@@ -1,0 +1,14 @@
+{% extends '_layout.html' %}
+
+{% block title %}Add an Ingredient | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+      </form>
+    </div>
+  </div>
+{% endblock %}

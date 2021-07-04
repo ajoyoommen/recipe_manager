@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render
+from django.views.generic.edit import CreateView
 
 from recipes import models
 
@@ -27,3 +28,9 @@ def get_ingredient(request, ingredient_id):
     return render(request, 'ingredients/detail.html', {
         'ingredient': ingredient
     })
+
+
+class CreateIngredient(CreateView):
+    model = models.Ingredient
+    fields = ['name', 'article_number', 'cost', 'unit']
+    template_name = 'ingredients/new.html'

@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db import models
+from django.urls import reverse
 
 
 class Ingredient(models.Model):
@@ -23,6 +24,9 @@ class Ingredient(models.Model):
     
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('ingredient-detail', kwargs={'ingredient_id': self.pk})
     
     def get_unit_for_display(self):
         if self.unit == self.GRAM:
