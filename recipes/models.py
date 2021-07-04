@@ -44,6 +44,9 @@ class Recipe(models.Model):
     def count_ingredients(self):
         return self.quantities.count()
 
+    def get_initials(self):
+        return self.name[0].upper()
+
 class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipes')
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="quantities")
