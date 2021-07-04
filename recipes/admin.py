@@ -13,5 +13,9 @@ class RecipeAdmin(admin.ModelAdmin):
     inlines = (IngredientsInline, )
 
 
-admin.site.register(Ingredient)
+@admin.register(Ingredient)
+class IngredientAdmin(admin.ModelAdmin):
+    list_display =('name', 'unit', 'cost')
+
+
 admin.site.register(RecipeIngredient)

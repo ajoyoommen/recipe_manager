@@ -6,7 +6,15 @@
       <img src="{% static 'images/ingredients.jpg' %}" class="card-img-top" alt="Recipe for {{ r.name }}">
     </div>
     <div class="col-md-8">
-      <h5 class="card-title">{{ ingredient.name }}</h5>
+      <h5 class="card-title">
+        {{ ingredient.name }}
+        <span class="float-end">
+          <a href="{% url 'ingredient-edit' ingredient.id %}">
+            <img src="{% static 'images/edit-icon.png' %}"/>
+          </a>
+        </span>
+
+      </h5>
       <h6 class="card-subtitle mb-2 text-muted">Ingredient</h6>
       <hr>
       <ul class="list-group list-group-flush">

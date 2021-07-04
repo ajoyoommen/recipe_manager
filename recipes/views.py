@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from recipes import models
 from recipes.forms import IngredientForm
@@ -19,7 +19,7 @@ def get_recipe(request, recipe_id):
 
 
 def get_ingredients(request):
-    ingredients = models.Ingredient.objects.all()
+    ingredients = models.Ingredient.objects.order_by('name')
     return render(request, 'ingredients/list.html', {
         'ingredients': ingredients
     })
@@ -34,4 +34,10 @@ def get_ingredient(request, ingredient_id):
 class CreateIngredient(CreateView):
     model = models.Ingredient
     template_name = 'ingredients/new.html'
+    form_class = IngredientForm
+
+
+class UpdateIngredient(UpdateView):
+    model = models.Ingredient
+    template_name = 'ingredients/edit.html'
     form_class = IngredientForm
