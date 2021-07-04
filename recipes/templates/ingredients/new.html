@@ -4,10 +4,37 @@
 
 {% block content %}
   <div class="row">
-    <div class="col">
+    <div class="col-md-4">
       <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
+        <p class="lead">Add an ingredient</p>
+        <p>
+          <label class="form-label" for="id_name">Name:</label>
+          <input class="form-control" type="text" name="name" maxlength="255" required="" id="id_name">
+        </p>
+        <p>
+          <label class="form-label" for="id_article_number">Article number:</label>
+          <textarea class="form-control" name="article_number" cols="40" rows="10" id="id_article_number"></textarea>
+        </p>
+        <p>
+          <label class="form-label" for="id_cost">Cost:</label>
+          <input class="form-control" type="number" name="cost" value="0" step="0.0001" required="" id="id_cost">
+        </p>
+        <p>
+          <label class="form-label" for="id_unit">Unit:</label>
+          <select class="form-control" name="unit" required="" id="id_unit">
+            <option value="" selected="">---------</option>
+            <option value="gram">1 gram</option>
+            <option value="kilogram">1 kilogram</option>
+            <option value="liter">1 liter</option>
+            <option value="centiliter">1 centiliter</option>
+          </select>
+        </p>
+        {% if form.errors %}
+          <div class="alert alert-error">
+            {{ form.errors}}
+          </div>
+        {% endif %}
+        <input class="form-control btn-primary" type="submit" value="Add ingredient">
       </form>
     </div>
   </div>

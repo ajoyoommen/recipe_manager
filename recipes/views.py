@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic.edit import CreateView
 
 from recipes import models
+from recipes.forms import IngredientForm
 
 
 def home(request):
@@ -32,5 +33,5 @@ def get_ingredient(request, ingredient_id):
 
 class CreateIngredient(CreateView):
     model = models.Ingredient
-    fields = ['name', 'article_number', 'cost', 'unit']
     template_name = 'ingredients/new.html'
+    form_class = IngredientForm
