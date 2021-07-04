@@ -11,19 +11,19 @@ def home(request):
 
 def get_recipe(request, recipe_id):
     recipe = get_object_or_404(models.Recipe, pk=recipe_id)
-    return render(request, 'recipe.html', {
+    return render(request, 'recipes/detail.html', {
         'recipe': recipe
     })
 
 
 def get_ingredients(request):
     ingredients = models.Ingredient.objects.all()
-    return render(request, 'ingredients.html', {
+    return render(request, 'ingredients/list.html', {
         'ingredients': ingredients
     })
 
 def get_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(models.Ingredient, pk=ingredient_id)
-    return render(request, 'ingredient.html', {
+    return render(request, 'ingredients/detail.html', {
         'ingredient': ingredient
     })
