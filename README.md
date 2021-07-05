@@ -31,3 +31,5 @@ This application can be used via the [admin](/admin/recipes) or the [webpage](/r
 * Recipe - Support for multiple ingredients
 * Editing a recipe
 * Supporting multiple units when adding recipe
+* Unit tests
+* Dockerfile
