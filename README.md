@@ -16,7 +16,7 @@ The application start at port 8000, so it will be accessible at `http://127.0.0.
 
 ## Usage
 
-This application can be used via the [admin](/admin/recipes) or the [webpage](/recipes/home).
+This application can be used via the [admin](/admin/recipes) or the [webpage](/recipes/).
 
 * To use via admin, create a super user and login using the user credentials
 * To use via the custom webpage, no login is required.
