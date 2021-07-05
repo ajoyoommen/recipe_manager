@@ -1,18 +1,18 @@
 {% extends '_base.html' %}
 
 {% block body %}
+  {% include '__navbar.html' %}
   <div class="container">
-    {% include '__navbar.html' %}
 
     {% block content %}
     {% endblock %}
 
     <div class="row pt-5">
-      <blockquote class="blockquote text-secondary">
+      <blockquote class="blockquote text-secondary" style="font-size: 90%;">
         <hr>
-        <p class="mb-0">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+        <p class="mb-0">Icons made by <a class="link-dark" href="https://www.freepik.com" title="Freepik">Freepik</a> from <a class="link-dark" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
 
-        <a href="https://icons8.com/icon/86374/edit">Edit icon by Icons8</a>
+        <a class="link-dark" href="https://icons8.com/icon/86374/edit">Edit icon by Icons8</a>
       </blockquote>
 
     </div>

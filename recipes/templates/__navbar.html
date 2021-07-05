@@ -7,19 +7,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" href="{% url 'recipe-add' %}">New recipe</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Ingredients
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'ingredients' %}">Show all</a></li>
-            <li><a class="dropdown-item" href="{% url 'ingredient-add' %}">Add...</a></li>
-          </ul>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'ingredients' %}">Ingredients</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'ingredient-add' %}">Add ingredient</a>
         </li>
       </ul>
     </div>

@@ -5,7 +5,7 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-4">
+    <div class="col bg-rm-secondary">
       <form method="post">{% csrf_token %}
         <p class="lead">Add a new recipe</p>
         <label class="form-label" for="id_name">Name:</label>
@@ -35,7 +35,7 @@
             {{ form.errors}}
           </div>
         {% endif %}
-        <input class="form-control btn-primary" type="submit" value="Save recipe">
+        <input class="form-control btn-primary bg-rm-main" type="submit" value="Save recipe">
       </form>
     </div>
   </div>

@@ -13,7 +13,11 @@
 }
 
 .bg-rm-main {
-  background: #6E77AC;
+  background-color: #6E77AC;
+}
+
+.bg-rm-secondary {
+  background-color: #b8cccf;
 }
 
 .bg-ingredient {

@@ -1,8 +1,8 @@
 {% load static %}
 
 {% for r in recipes %}
-  <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
+  <div class="col-md-3 p-4">
+      <div class="card shadow">
         <div class="recipe-thumb m-3 text-center bg-rm-main">{{ r.get_initials }}</div>
         <div class="card-body">
           <h5 class="card-title">{{ r.name }}</h5>
