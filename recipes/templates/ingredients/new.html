@@ -1,18 +1,13 @@
-{% extends '_layout.html' %}
+{% extends '_layout_form.html' %}
 
 {% load crispy_forms_tags %}
 
 {% block title %}Add an Ingredient | Recipe Manager{% endblock %}
 
-{% block content %}
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 shadow mt-5">
-      <form method="post">{% csrf_token %}
-        <p class="lead">Add an ingredient</p>
-        {{ form|crispy }}
-        <input class="form-control btn-primary bg-rm-main my-4" type="submit" value="Add ingredient">
-      </form>
-    </div>
-  </div>
+{% block form %}
+  <form method="post">{% csrf_token %}
+    <p class="lead">Add an ingredient</p>
+    {{ form|crispy }}
+    <input class="form-control btn-primary bg-rm-main my-4" type="submit" value="Add ingredient">
+  </form>
 {% endblock %}
