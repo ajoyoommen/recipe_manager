@@ -44,7 +44,7 @@ def get_ingredient(request, ingredient_id):
 
 class AddIngredient(CreateView):
     model = models.Ingredient
-    template_name = 'ingredients/new.html'
+    template_name = 'ingredients/add.html'
     form_class = IngredientForm
 
 
@@ -56,7 +56,7 @@ class EditIngredient(UpdateView):
 
 class AddRecipe(CreateView):
     model = models.Recipe
-    template_name = 'recipes/new.html'
+    template_name = 'recipes/add.html'
     form_class = RecipeForm
 
     def get_context_data(self, **kwargs):
