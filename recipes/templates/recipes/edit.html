@@ -1,0 +1,15 @@
+{% extends '_layout_form.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Edit recipe | {{ recipe.name }} | Recipe Manager{% endblock %}
+
+{% block form %}
+<!--  <form method="post">{% csrf_token %}-->
+    <p class="lead">Edit recipe</p>
+    {{ formset.management_form|crispy }}
+    {{ form | crispy }}
+
+    {% crispy formset form.helper %}
+<!--  </form>-->
+{% endblock %}

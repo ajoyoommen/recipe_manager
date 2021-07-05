@@ -60,7 +60,7 @@ class RecipeForm(forms.ModelForm):
             'ingredient',
             'quantity',
         )
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Save recipe', css_class='btn-primary bg-rm-main mx-2'))
 
 
 IngredientsFormSet = inlineformset_factory(
