@@ -9,7 +9,7 @@ from recipes.forms import IngredientForm, IngredientsFormSet, RecipeForm
 
 def home(request):
     return render(request, 'home.html', {
-        'recipes': models.Recipe.objects.all()
+        'recipes': models.Recipe.objects.order_by('name')
     })
 
 
@@ -56,7 +56,7 @@ class EditIngredient(UpdateView):
 
 class AddRecipe(CreateView):
     model = models.Recipe
-    template_name = 'recipes/new.html'
+    template_name = 'recipes/edit.html'
     form_class = RecipeForm
 
     def get_context_data(self, **kwargs):

@@ -7,9 +7,6 @@
 {% block form %}
 <!--  <form method="post">{% csrf_token %}-->
     <p class="lead">Edit recipe</p>
-    {{ formset.management_form|crispy }}
-    {{ form | crispy }}
-
-    {% crispy formset form.helper %}
+    {% crispy form %}
 <!--  </form>-->
 {% endblock %}
