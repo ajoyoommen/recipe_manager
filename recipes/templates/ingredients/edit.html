@@ -1,36 +1,13 @@
 {% extends '_layout_form.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Edit Ingredient | {{ ingredient.name }} | Recipe Manager{% endblock %}
 
 {% block form %}
   <form method="post">{% csrf_token %}
     <p class="lead">Edit ingredient</p>
-    <p>
-      <label class="form-label" for="id_name">Name:</label>
-      <input class="form-control" type="text" name="name" maxlength="255" required="" id="id_name" value="{{ ingredient.name }}">
-    </p>
-    <p>
-      <label class="form-label" for="id_article_number">Article number:</label>
-      <textarea class="form-control" name="article_number" cols="40" rows="10" id="id_article_number">{{ ingredient.description }}</textarea>
-    </p>
-    <p>
-      <label class="form-label" for="id_cost">Cost:</label>
-      <input class="form-control" type="number" name="cost" step="0.0001" required="" id="id_cost" value="{{ ingredient.cost }}">
-    </p>
-    <p>
-      <label class="form-label" for="id_unit">Unit:</label>
-      <select class="form-control" name="unit" required="" id="id_unit">
-        <option value="">---------</option>
-        {% for value, key in form.fields.unit.choices %}
-          <option value="{{ value }}"{% if ingredient.unit == value %} selected=""{% endif %}>{{ key }}</option>
-        {% endfor %}
-      </select>
-    </p>
-    {% if form.errors %}
-      <div class="alert alert-error">
-        {{ form.errors}}
-      </div>
-    {% endif %}
+    {{ form|crispy }}
     <input class="form-control btn-primary" type="submit" value="Save">
   </form>
 {% endblock %}
