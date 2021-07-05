@@ -4,7 +4,7 @@
 {% block title %}Recipes | Recipe Manager{% endblock %}
 
 {% block content %}
-  <div class="row mx-1 p-5 bg-dark">
+  <div class="row mx-1 p-5 rm-banner">
     <div class="col">
       <figure class="text-center">
         <blockquote class="blockquote text-light">
@@ -25,7 +25,7 @@
       <p>Here are some recipes, click to view more information</p>
       {% include 'recipes/__list_cards.html' %}
     {% else %}
-    <h6>No recipes have been added yet! Add a <a href="#">new</a> recipe.</h6>
+    <p class="lead">No recipes have been added yet! Add a <a href="{% url 'recipe-add' %}">new</a> recipe.</p>
     {% endif %}
   </div>
 

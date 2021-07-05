@@ -26,7 +26,7 @@ class IngredientList(ListView):
 
     def get_queryset(self):
         q = self.request.GET.get('q', '')
-        object_list = self.model.objects.all()
+        object_list = self.model.objects.order_by('name')
         if q:
             _objs_name = object_list.filter(name__icontains=q)
             _objs_artn = object_list.filter(article_number__icontains=q)
