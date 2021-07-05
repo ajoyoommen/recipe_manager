@@ -4,7 +4,8 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 shadow mt-5">
       <form method="post">{% csrf_token %}
         <p class="lead">Add an ingredient</p>
         <p>
@@ -34,7 +35,7 @@
             {{ form.errors}}
           </div>
         {% endif %}
-        <input class="form-control btn-primary" type="submit" value="Add ingredient">
+        <input class="form-control btn-primary bg-rm-main my-4" type="submit" value="Add ingredient">
       </form>
     </div>
   </div>
