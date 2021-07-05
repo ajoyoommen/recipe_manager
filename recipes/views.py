@@ -78,7 +78,7 @@ class AddRecipe(CreateView):
         return super().form_valid(form)
     
     
-class EditRecipe(CreateView):
+class EditRecipe(UpdateView):
     model = models.Recipe
     template_name = 'recipes/edit.html'
     form_class = RecipeForm

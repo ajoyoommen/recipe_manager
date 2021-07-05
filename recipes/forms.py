@@ -77,6 +77,6 @@ class RecipeForm(forms.ModelForm):
                 Fieldset('Add ingredients',
                     Formset('formset')),
                 HTML("<br>"),
-                ButtonHolder(Submit('submit', 'save')),
+                Submit('submit', 'Save recipe', css_class="btn-primary bg-rm-main my-3"),
                 )
             )
