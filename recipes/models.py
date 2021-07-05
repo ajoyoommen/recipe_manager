@@ -74,7 +74,8 @@ class Recipe(models.Model):
         return self.ingredients.count()
 
     def get_initials(self):
-        return self.name[0].upper()
+        words = self.name.split()
+        return "".join([w[0].upper() for w in words])
 
 
 class RecipeIngredient(models.Model):
