@@ -1,7 +1,9 @@
 from decimal import Decimal
 
+from crispy_forms.layout import Layout, Submit
 from django import forms
 from django.forms import inlineformset_factory
+from crispy_forms.helper import FormHelper
 
 from recipes.models import Ingredient, Recipe, RecipeIngredient
 
@@ -49,6 +51,18 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ('name', 'description')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-inline'
+        self.helper.field_template = 'inline_field.html'
+        self.helper.layout = Layout(
+            'ingredient',
+            'quantity',
+        )
+        self.helper.add_input(Submit('submit', 'Submit'))
+
 
 IngredientsFormSet = inlineformset_factory(
-    Recipe, RecipeIngredient, form=RecipeForm, fields=['ingredient', 'quantity'])
+    Recipe, RecipeIngredient, form=RecipeForm, fields=['ingredient', 'quantity'],
+    extra=1)

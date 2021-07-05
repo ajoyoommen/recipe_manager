@@ -62,17 +62,17 @@ class AddRecipe(CreateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['ingredients'] = IngredientsFormSet(self.request.POST)
+            data['formset'] = IngredientsFormSet(self.request.POST)
         else:
-            data['ingredients'] = IngredientsFormSet()
+            data['formset'] = IngredientsFormSet()
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        ingredients = context['ingredients']
+        formset = context['formset']
         with transaction.atomic():
             self.object = form.save()
-            if ingredients.is_valid():
-                ingredients.instance = self.object
-                ingredients.save()
+            if formset.is_valid():
+                formset.instance = self.object
+                formset.save()
         return super().form_valid(form)

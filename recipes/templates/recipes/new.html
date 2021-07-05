@@ -1,4 +1,5 @@
 {% extends '_layout_form.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %}Add recipe | Recipe Manager{% endblock %}
@@ -6,33 +7,13 @@
 {% block form %}
   <form method="post">{% csrf_token %}
     <p class="lead">Add a new recipe</p>
-    <label class="form-label" for="id_name">Name:</label>
-    <input class="form-control" type="text" name="name" maxlength="255" required="" id="id_name">
+    {{ form | crispy }}
 
-    <label class="form-label" for="id_description">Description:</label>
-    <textarea class="form-control" name="description" cols="40" rows="10" id="id_description"></textarea>
-
-    <input type="hidden" name="ingredients-TOTAL_FORMS" value="1" id="id_ingredients-TOTAL_FORMS">
-    <input type="hidden" name="ingredients-INITIAL_FORMS" value="0" id="id_ingredients-INITIAL_FORMS">
-    <input type="hidden" name="ingredients-MIN_NUM_FORMS" value="0" id="id_ingredients-MIN_NUM_FORMS">
-    <input type="hidden" name="ingredients-MAX_NUM_FORMS" value="1000" id="id_ingredients-MAX_NUM_FORMS">
-    <hr>
-    <label class="form-label" for="id_ingredients-0-ingredient">Ingredient:</label>
-    <select class="form-control" name="ingredients-0-ingredient" id="id_ingredients-0-ingredient">
-      {% for value, text in ingredients.0.ingredient.field.choices %}
-        <option value="{{ value }}">{{ text }}</option>
-      {% endfor %}
-    </select>
-    <label class="form-label" for="id_ingredients-0-quantity">Quantity:</label>
-    <input class="form-control" type="number" name="ingredients-0-quantity" value="0" step="any" id="id_ingredients-0-quantity">
-
-    <input type="hidden" name="ingredients-0-id" id="id_ingredients-0-id">
-    <input type="hidden" name="ingredients-0-recipe" id="id_ingredients-0-recipe">
-    {% if form.errors %}
-      <div class="alert alert-error">
-        {{ form.errors}}
-      </div>
-    {% endif %}
+    {% for f in formset %}
+    <div class="input-group my-3">
+      {% crispy f form.helper %}
+    </div>
+    {% endfor %}
     <input class="form-control btn-primary bg-rm-main my-4" type="submit" value="Save recipe">
   </form>
 {% endblock %}
