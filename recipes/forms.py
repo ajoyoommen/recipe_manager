@@ -1,10 +1,11 @@
 from decimal import Decimal
 
-from crispy_forms.layout import Layout, Submit
 from django import forms
 from django.forms import inlineformset_factory
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
 
+from recipes.custom_layout import Formset
 from recipes.models import Ingredient, Recipe, RecipeIngredient
 
 
@@ -46,6 +47,17 @@ class IngredientForm(forms.ModelForm):
         return obj
 
 
+class RecipeIngredientForm(forms.ModelForm):
+    class Meta:
+        model = RecipeIngredient
+        fields = ('ingredient', 'quantity')
+
+
+IngredientsFormSet = inlineformset_factory(
+    Recipe, RecipeIngredient, form=RecipeIngredientForm, fields=['ingredient', 'quantity'],
+    extra=1, can_delete=True)
+
+
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
@@ -54,15 +66,17 @@ class RecipeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_class = 'form-inline'
-        self.helper.field_template = 'inline_field.html'
+        self.helper.form_tag = True
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3 create-label'
+        self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
-            'ingredient',
-            'quantity',
-        )
-        self.helper.add_input(Submit('submit', 'Submit'))
-
-
-IngredientsFormSet = inlineformset_factory(
-    Recipe, RecipeIngredient, form=RecipeForm, fields=['ingredient', 'quantity'],
-    extra=1)
+            Div(
+                Field('name'),
+                Field('description'),
+                Fieldset('Add ingredients',
+                    Formset('formset')),
+                HTML("<br>"),
+                Submit('submit', 'Save recipe', css_class="btn-primary bg-rm-main my-3"),
+                )
+            )

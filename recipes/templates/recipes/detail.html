@@ -1,4 +1,4 @@
-{% extends '_layout.html' %}
+{% extends 'layout/_layout.html' %}
 {% load static %}
 
 {% block title %}{{ recipe.name }} | #{{ recipe.id }} | Recipe Manager{% endblock %}
@@ -10,7 +10,12 @@
         <div class="card-body row">
           <div class="col-md-5">
             <h5 class="card-title">{{ recipe.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Ingredients</h6>
+            <span class="float-end">
+              <a href="{% url 'recipe-edit' recipe.id %}">
+                <img src="{% static 'images/edit-icon.png' %}"/>
+              </a>
+            </span>
+            <h6 class="card-subtitle mb-2 text-muted">Recipe</h6>
             <p class="card-text">{{ recipe.description }}</p>
             <hr>
             {% if recipe.ingredients.all %}

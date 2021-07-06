@@ -9,7 +9,7 @@ from recipes.forms import IngredientForm, IngredientsFormSet, RecipeForm
 
 def home(request):
     return render(request, 'home.html', {
-        'recipes': models.Recipe.objects.all()
+        'recipes': models.Recipe.objects.order_by('name')
     })
 
 
@@ -42,13 +42,13 @@ def get_ingredient(request, ingredient_id):
     })
 
 
-class CreateIngredient(CreateView):
+class AddIngredient(CreateView):
     model = models.Ingredient
-    template_name = 'ingredients/new.html'
+    template_name = 'ingredients/add.html'
     form_class = IngredientForm
 
 
-class UpdateIngredient(UpdateView):
+class EditIngredient(UpdateView):
     model = models.Ingredient
     template_name = 'ingredients/edit.html'
     form_class = IngredientForm
@@ -56,13 +56,37 @@ class UpdateIngredient(UpdateView):
 
 class AddRecipe(CreateView):
     model = models.Recipe
-    template_name = 'recipes/new.html'
+    template_name = 'recipes/add.html'
     form_class = RecipeForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
             data['formset'] = IngredientsFormSet(self.request.POST)
+        else:
+            data['formset'] = IngredientsFormSet()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+        with transaction.atomic():
+            self.object = form.save()
+            if formset.is_valid():
+                formset.instance = self.object
+                formset.save()
+        return super().form_valid(form)
+    
+    
+class EditRecipe(UpdateView):
+    model = models.Recipe
+    template_name = 'recipes/edit.html'
+    form_class = RecipeForm
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['formset'] = IngredientsFormSet(self.request.POST, instance=self.object)
         else:
             data['formset'] = IngredientsFormSet()
         return data

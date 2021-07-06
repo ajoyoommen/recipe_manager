@@ -1,4 +1,4 @@
-{% extends '_layout_form.html' %}
+{% extends 'layout/_layout_form.html' %}
 
 {% load crispy_forms_tags %}
 
@@ -8,6 +8,6 @@
   <form method="post">{% csrf_token %}
     <p class="lead">Edit ingredient</p>
     {{ form|crispy }}
-    <input class="form-control btn-primary" type="submit" value="Save">
+    <input class="form-control btn-primary bg-rm-main my-4" type="submit" value="Save">
   </form>
 {% endblock %}
