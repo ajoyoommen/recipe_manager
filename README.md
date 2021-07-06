@@ -36,6 +36,35 @@ This application can be used via the [admin](/admin/recipes) or the [webpage](/r
 * Unit tests
 * Dockerfile
 
+## Deploying to prod
+
+    source venv/bin/activate
+    export DJANGO_SETTINGS_MODULE=recipe_manager.settings.prod
+    export STATIC_ROOT=/home/ubuntu/static
+    export SECRET_KEY='prod-secret'
+
+    pip install gunicorn
+    python manager.py collectstatic --noinput
+    gunicorn --bind 0.0.0.0:8000 recipe_manager.wsgi
+
+Config for Nginx
+
+```
+server {
+   listen 80;
+   listen [::]:80;
+   
+   server_name domain.com;
+   
+   location /static/ {
+       alias /home/ubuntu/recipe_manager/static/;
+   }
+   
+   location / {
+       proxy_pass http://127.0.0.1:8000;
+   }
+}
+```
 
 ## References
 
