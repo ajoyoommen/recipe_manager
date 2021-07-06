@@ -4,8 +4,11 @@ This is a recipe manager developed with Django, bootstrap 5 and django crispy fo
 
 ## Installation
 
-    pip install -r requirements.txt
-    python manage.py migrate  # Run migrations
+1. Setup and activate virtual environment
+
+       cd recipe_manager/
+       pip install -r requirements.txt
+       python manage.py migrate  # Run migrations
 
 
 ## Starting the application
@@ -32,3 +35,8 @@ This application can be used via the [admin](/admin/recipes) or the [webpage](/r
 * Supporting multiple units when adding or editing recipe
 * Unit tests
 * Dockerfile
+
+
+## References
+
+* [Inline formsets with crispy forms](https://dev.to/zxenia/django-inline-formsets-with-class-based-views-and-crispy-forms-14o6)
