@@ -1,0 +1,33 @@
+.recipe-thumb {
+  font-size: 5rem;
+  color: #fff;
+  line-height: 15rem;
+}
+
+.rm-main {
+  background-color: #81979A;
+}
+
+.rm-banner {
+  background-color: #3A485F;
+}
+
+.bg-rm-main {
+  background-color: #6E77AC;
+}
+
+.bg-rm-secondary {
+  background-color: #b8cccf;
+}
+
+.bg-ingredient {
+  background-color: #FCDE96;
+}
+
+.text-white {
+  acolor: #EEE;
+}
+
+.text-ingredient {
+}
+

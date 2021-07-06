@@ -1,0 +1,45 @@
+{% extends 'layout/_layout.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.name }} | #{{ recipe.id }} | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body row">
+          <div class="col-md-5">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <span class="float-end">
+              <a href="{% url 'recipe-edit' recipe.id %}">
+                <img src="{% static 'images/edit-icon.png' %}"/>
+              </a>
+            </span>
+            <h6 class="card-subtitle mb-2 text-muted">Recipe</h6>
+            <p class="card-text">{{ recipe.description }}</p>
+            <hr>
+            {% if recipe.ingredients.all %}
+              <ul class="list-group list-group-flush">
+                {% for i in recipe.ingredients.all %}
+                  <a href="{% url 'ingredient-detail' i.ingredient.id %}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{ i.ingredient.name }}</h5>
+                      <small>₹ {{ i.get_cost }}</small>
+                    </div>
+                    <p class="mb-1">{{ i.quantity }} {{ i.ingredient.get_unit_for_display}}</p>
+                  </a>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="col-md-7">
+            <img src="{% static 'images/recipe-book.jpg' %}" class="card-img-top" alt="Recipe for {{ r.name }}">
+          </div>
+        </div>
+        <div class="card-footer">
+          <p class="lead">Total cost of recipe: ₹ {{ recipe.get_cost }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

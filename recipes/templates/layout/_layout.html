@@ -1,0 +1,21 @@
+{% extends 'layout/_base.html' %}
+
+{% block body %}
+  {% include 'layout/__navbar.html' %}
+  <div class="container">
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="row pt-5">
+      <blockquote class="blockquote text-secondary" style="font-size: 90%;">
+        <hr>
+        <p class="mb-0">Icons made by <a class="link-dark" href="https://www.freepik.com" title="Freepik">Freepik</a> from <a class="link-dark" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+
+        <a class="link-dark" href="https://icons8.com/icon/86374/edit">Edit icon by Icons8</a>
+      </blockquote>
+
+    </div>
+  </div>
+
+{% endblock %}

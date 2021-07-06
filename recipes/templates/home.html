@@ -1,0 +1,32 @@
+{% extends 'layout/_layout.html' %}
+{% load static %}
+
+{% block title %}Recipes | Recipe Manager{% endblock %}
+
+{% block content %}
+  <div class="row mx-1 p-5 rm-banner">
+    <div class="col">
+      <figure class="text-center">
+        <blockquote class="blockquote text-light">
+          <p>Welcome to recipe manager! A simple application to manage your kitchen supplies.</p>
+          <p>Create recipes, add ingredients and view computed costs to make your life easier!</p>
+        </blockquote>
+      </figure>
+      <p class="h3"></p>
+      <!--div class="col-md-6">
+        <img src="{% static 'images/recipe.jpg' %}" class="img-fluid">
+      </div-->
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    {% if recipes %}
+      <h3>Recipes</h3>
+      <p>Here are some recipes, click to view more information</p>
+      {% include 'recipes/__list_cards.html' %}
+    {% else %}
+    <p class="lead">No recipes have been added yet! Add a <a href="{% url 'recipe-add' %}">new</a> recipe.</p>
+    {% endif %}
+  </div>
+
+{% endblock %}
