@@ -66,6 +66,25 @@ server {
 }
 ```
 
+
+## Deploying with Docker
+
+Create a file `start_server.sh` as:
+
+    source venv/bin/activate
+    export DJANGO_SETTINGS_MODULE=recipe_manager.settings.prod
+    export STATIC_ROOT=/app/static
+    export SECRET_KEY='prod-secret'
+
+    python manage.py collectstatic
+    gunicorn --bind 0.0.0.0:8000 recipe_manager.wsgi
+
+Now build and run the docker images:
+
+    docker build -t recipe_manager:1 .
+    docker run -p 8000:8000 recipe_manager:1
+
+
 ## References
 
 * [Inline formsets with crispy forms](https://dev.to/zxenia/django-inline-formsets-with-class-based-views-and-crispy-forms-14o6)
