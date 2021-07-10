@@ -23,7 +23,7 @@ class Ingredient(models.Model):
     unit = models.CharField(max_length=20, choices=UNITS)
     
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.unit})'
 
     def get_absolute_url(self):
         return reverse('ingredient-detail', kwargs={'ingredient_id': self.pk})
