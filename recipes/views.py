@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 from recipes import models
-from recipes.forms import IngredientForm, IngredientsFormSet, RecipeForm
+from recipes.forms import FORMSET_NAME, IngredientForm, IngredientsFormSet, RecipeForm
 
 
 def home(request):
@@ -62,14 +62,14 @@ class AddRecipe(CreateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['formset'] = IngredientsFormSet(self.request.POST)
+            data[FORMSET_NAME] = IngredientsFormSet(self.request.POST)
         else:
-            data['formset'] = IngredientsFormSet()
+            data[FORMSET_NAME] = IngredientsFormSet()
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        formset = context['formset']
+        formset = context[FORMSET_NAME]
         with transaction.atomic():
             self.object = form.save()
             if formset.is_valid():
@@ -86,14 +86,14 @@ class EditRecipe(UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['formset'] = IngredientsFormSet(self.request.POST, instance=self.object)
+            data[FORMSET_NAME] = IngredientsFormSet(self.request.POST, instance=self.object)
         else:
-            data['formset'] = IngredientsFormSet()
+            data[FORMSET_NAME] = IngredientsFormSet()
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        formset = context['formset']
+        formset = context[FORMSET_NAME]
         with transaction.atomic():
             self.object = form.save()
             if formset.is_valid():
