@@ -1,23 +1,22 @@
 from django.db import transaction
 from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 from recipes import models
 from recipes.forms import FORMSET_NAME, IngredientForm, IngredientsFormSet, RecipeForm
 
 
-def home(request):
-    return render(request, 'home.html', {
-        'recipes': models.Recipe.objects.order_by('name')
-    })
+class RecipeList(ListView):
+    model = models.Recipe
+    template_name = 'home.html'
+    context_object_name = 'recipes'
+    ordering = ['name']
 
 
-def get_recipe(request, recipe_id):
-    recipe = get_object_or_404(models.Recipe, pk=recipe_id)
-    return render(request, 'recipes/detail.html', {
-        'recipe': recipe
-    })
+class RecipeDetail(DetailView):
+    model = models.Recipe
+    template_name = 'recipes/detail.html'
 
 
 class IngredientList(ListView):
@@ -31,15 +30,12 @@ class IngredientList(ListView):
             _objs_name = object_list.filter(name__icontains=q)
             _objs_artn = object_list.filter(article_number__icontains=q)
             object_list =  _objs_name | _objs_artn
-        print(f'Name: `{q}`, queryset: {object_list}')
         return object_list
 
 
-def get_ingredient(request, ingredient_id):
-    ingredient = get_object_or_404(models.Ingredient, pk=ingredient_id)
-    return render(request, 'ingredients/detail.html', {
-        'ingredient': ingredient
-    })
+class IngredientDetail(DetailView):
+    model = models.Ingredient
+    template_name = 'ingredients/detail.html'
 
 
 class AddIngredient(CreateView):

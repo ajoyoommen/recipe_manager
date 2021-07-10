@@ -26,7 +26,7 @@ class Ingredient(models.Model):
         return f'{self.name} ({self.unit})'
 
     def get_absolute_url(self):
-        return reverse('ingredient-detail', kwargs={'ingredient_id': self.pk})
+        return reverse('ingredient-detail', kwargs={'pk': self.pk})
     
     def get_unit_for_display(self):
         if self.unit == self.GRAM:
@@ -64,7 +64,7 @@ class Recipe(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('recipe-detail', kwargs={'recipe_id': self.pk})
+        return reverse('recipe-detail', kwargs={'pk': self.pk})
 
     def get_cost(self):
         cost_ingds = [i.get_cost() for i in self.ingredients.all()]
