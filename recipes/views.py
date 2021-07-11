@@ -18,6 +18,9 @@ class RecipeDetail(DetailView):
     model = models.Recipe
     template_name = 'recipes/detail.html'
 
+    def get_queryset(self):
+        return self.model.objects.prefetch_related('ingredients__ingredient')
+
 
 class IngredientList(ListView):
     template_name = 'ingredients/list.html'
@@ -55,6 +58,9 @@ class AddRecipe(CreateView):
     template_name = 'recipes/add.html'
     form_class = RecipeForm
 
+    def get_queryset(self):
+        return self.model.objects.prefetch_related('ingredients__ingredient')
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
@@ -72,12 +78,15 @@ class AddRecipe(CreateView):
                 formset.instance = self.object
                 formset.save()
         return super().form_valid(form)
-    
-    
+
+
 class EditRecipe(UpdateView):
     model = models.Recipe
     template_name = 'recipes/edit.html'
     form_class = RecipeForm
+
+    def get_queryset(self):
+        return self.model.objects.prefetch_related('ingredients__ingredient')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
