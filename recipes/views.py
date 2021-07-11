@@ -15,11 +15,8 @@ class RecipeList(ListView):
 
 
 class RecipeDetail(DetailView):
-    model = models.Recipe
+    queryset = models.Recipe.objects.prefetch_related('ingredients__ingredient')
     template_name = 'recipes/detail.html'
-
-    def get_queryset(self):
-        return self.model.objects.prefetch_related('ingredients__ingredient')
 
 
 class IngredientList(ListView):
@@ -54,12 +51,9 @@ class EditIngredient(UpdateView):
 
 
 class AddRecipe(CreateView):
-    model = models.Recipe
+    queryset = models.Recipe.objects.prefetch_related('ingredients__ingredient')
     template_name = 'recipes/add.html'
     form_class = RecipeForm
-
-    def get_queryset(self):
-        return self.model.objects.prefetch_related('ingredients__ingredient')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -81,12 +75,9 @@ class AddRecipe(CreateView):
 
 
 class EditRecipe(UpdateView):
-    model = models.Recipe
+    queryset = models.Recipe.objects.prefetch_related('ingredients__ingredient')
     template_name = 'recipes/edit.html'
     form_class = RecipeForm
-
-    def get_queryset(self):
-        return self.model.objects.prefetch_related('ingredients__ingredient')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
