@@ -6,7 +6,7 @@
 
 {% block form %}
   <form method="post">{% csrf_token %}
-    <p class="lead">Add an ingredient</p>
+    <p class="lead">Add ingredient</p>
     {{ form|crispy }}
     <input class="form-control btn-primary bg-rm-main my-4" type="submit" value="Add ingredient">
   </form>
