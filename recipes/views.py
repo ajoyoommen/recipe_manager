@@ -84,7 +84,7 @@ class EditRecipe(UpdateView):
         if self.request.POST:
             data[FORMSET_NAME] = IngredientsFormSet(self.request.POST, instance=self.object)
         else:
-            data[FORMSET_NAME] = IngredientsFormSet()
+            data[FORMSET_NAME] = IngredientsFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
