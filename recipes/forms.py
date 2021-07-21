@@ -16,13 +16,15 @@ CHOICES = (
     ('centiliter', '1 centiliter')
 )
 
+FORMSET_NAME = 'ingredients'
+
 
 class IngredientForm(forms.ModelForm):
     unit = forms.ChoiceField(choices=CHOICES)
 
     class Meta:
         model = Ingredient
-        fields = ['name', 'article_number', 'cost']
+        exclude = ()
 
     def save(self, commit=True):
         obj = super().save(commit=False)
@@ -50,18 +52,17 @@ class IngredientForm(forms.ModelForm):
 class RecipeIngredientForm(forms.ModelForm):
     class Meta:
         model = RecipeIngredient
-        fields = ('ingredient', 'quantity')
+        exclude = ()
 
 
 IngredientsFormSet = inlineformset_factory(
-    Recipe, RecipeIngredient, form=RecipeIngredientForm, fields=['ingredient', 'quantity'],
-    extra=1, can_delete=True)
+    Recipe, RecipeIngredient, form=RecipeIngredientForm, extra=1, can_delete=True)
 
 
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ('name', 'description')
+        exclude = ()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -75,7 +76,7 @@ class RecipeForm(forms.ModelForm):
                 Field('name'),
                 Field('description'),
                 Fieldset('Add ingredients',
-                    Formset('formset')),
+                    Formset(FORMSET_NAME)),
                 HTML("<br>"),
                 Submit('submit', 'Save recipe', css_class="btn-primary bg-rm-main my-3"),
                 )

@@ -1,8 +1,9 @@
 {% extends 'layout/_layout_form.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Add recipe | Recipe Manager{% endblock %}
+{% block title %}Add recipe{% endblock %}
 
 {% block form %}
+  <p class="lead mb-5">Add recipe</p>
   {% crispy form %}
 {% endblock %}
