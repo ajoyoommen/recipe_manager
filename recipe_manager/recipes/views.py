@@ -1,5 +1,4 @@
 from django.db import transaction
-from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
